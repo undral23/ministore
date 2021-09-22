@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,7 +27,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Entity(name = "ord")
+@Entity(name="order")
+@Table(name = "ORDERS")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,7 +43,7 @@ public class Order {
 	List<LineItem> lineItems = new ArrayList<>();
 
 	Boolean orderPaid = false;
-	String orderStatus = OrderStatus.Pending.getOrderStatus();
+	String orderStatus = OrderStatus.PENDING.getOrderStatus();
 	@ManyToOne
 	@JsonIgnore
 	private Buyer buyer;

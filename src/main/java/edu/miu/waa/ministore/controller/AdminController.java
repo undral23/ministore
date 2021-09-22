@@ -58,10 +58,10 @@ public class AdminController {
 			return sellerService.makeItApprovedOrRejected(userName, "Rejected");
 	}
 
-	@GetMapping("/products/{id}/featured")
-	public Product makeProductFeatured(@RequestParam("get") boolean featured, @PathVariable long id) {
-		return productsService.makeItFeatured(id, featured);
-	}
+//	@GetMapping("/products/{id}/featured")
+//	public Product makeProductFeatured(@RequestParam("get") boolean featured, @PathVariable long id) {
+//		return productsService.makeItFeatured(id, featured);
+//	}
 
 	@GetMapping("/products/{product_id}/reviews/{review_id}")
 	public Review approveReview(@PathVariable long product_id, @PathVariable long review_id,
@@ -103,7 +103,7 @@ public class AdminController {
 	@GetMapping("/sellers/{id}")
 	public Seller getOneSeller(@PathVariable int id) {
 
-		return sellerService.getSellerBySId(id);
+		return sellerService.getSellerById(id);
 	}
 //    @DeleteMapping("products/{productId}")
 //    public boolean deleteProduct(@PathVariable long id){

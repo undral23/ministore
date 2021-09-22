@@ -20,9 +20,9 @@ public interface SellerRepository extends CrudRepository<Seller, Long> {
 
     @Query("select s from Seller s where s.user.email=:email")
     public Seller findSellerByEmail(@Param("email") String email);
-
-    @Query("select s from Seller  s where s.sId=:sId")
-    public Seller findSellerBySId(@Param("sId") long sId);
+//
+//    @Query("select s from Seller  s where s.sId=:sId")
+    public Seller findSellerById(@Param("id") long id);
 
     @Query(value = "SELECT DISTINCT ord_id FROM maskm_db.ord_line_items where line_items_id in " +
             "(SELECT li.id FROM maskm_db.line_item li where product_id  in " +

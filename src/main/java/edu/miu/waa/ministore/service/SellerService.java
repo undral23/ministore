@@ -1,32 +1,30 @@
 package edu.miu.waa.ministore.service;
 
-import org.springframework.data.repository.query.Param;
-
-import edu.miu.waa.ministore.domain.Address;
-import edu.miu.waa.ministore.domain.Order;
-import edu.miu.waa.ministore.domain.Product;
-import edu.miu.waa.ministore.domain.Seller;
-
 import java.util.List;
 
+import edu.miu.waa.ministore.domain.Order;
+import edu.miu.waa.ministore.domain.Seller;
 
 public interface SellerService {
-    public Seller getSellerBySId(long id);
-    public Seller getSellerByUserName(String userName);
-    public List<Long> getOrderIdsBySellerBySId(long sId);
+	public Seller getSellerById(long id);
 
-    public Seller makeItApprovedOrRejected(String userName, String status);
-    public List<Order> getOrdersBySellerBySId( long sId);
+	public Seller getSellerByUserName(String userName);
 
-    public List<Seller> getAllSellers();
+	public List<Long> getOrderIdsBySellerById(long id);
 
-    public void addSeller(Seller seller);
+	public Seller makeItApprovedOrRejected(String userName, String status);
 
-    public void save(Seller seller);
+	public List<Order> getOrdersBySellerById(long id);
 
-    public Order shipSellerOrder(String userName, long oId);
+	public List<Seller> getAllSellers();
 
-    public Order cancelSellerOrder(String userName, long oId);
+	public void addSeller(Seller seller);
 
-    public Order getOrderByIdForSeller(String userName, long oId);
+	public void save(Seller seller);
+
+	public Order shipSellerOrder(String userName, long oId);
+
+	public Order cancelSellerOrder(String userName, long oId);
+
+	public Order getOrderByIdForSeller(String userName, long oId);
 }

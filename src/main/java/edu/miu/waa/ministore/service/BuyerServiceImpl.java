@@ -56,7 +56,7 @@ public class BuyerServiceImpl implements BuyerService{
     @Override
     public void followSeller(long bId, long sId) {
         Buyer buyer=buyerRepository.findBuyerByBId(bId);
-        Seller seller= sellerRepository.findSellerBySId(sId);
+        Seller seller= sellerRepository.findSellerById(sId);
         List<Seller> sellersFollowed= buyerRepository.getSellerFollowedByBuyerId(bId);
         sellersFollowed.add(seller);
         buyer.setSellersFollowed(sellersFollowed);
@@ -66,7 +66,7 @@ public class BuyerServiceImpl implements BuyerService{
     @Override
     public void unFollowSeller(long bId, long sId) {
         Buyer buyer=buyerRepository.findBuyerByBId(bId);
-        Seller seller= sellerRepository.findSellerBySId(sId);
+        Seller seller= sellerRepository.findSellerById(sId);
         List<Seller> sellersFollowed= buyerRepository.getSellerFollowedByBuyerId(bId);
         sellersFollowed.remove(seller);
 
@@ -163,7 +163,7 @@ public class BuyerServiceImpl implements BuyerService{
     @Override
     public boolean deleteOrder(String userName, long id) {
         Order order=orderService.getOrderById(id);
-        if(order.getOrderStatus()!=OrderStatus.Shipped.getOrderStatus()||order.getOrderStatus()!=OrderStatus.Delivered.getOrderStatus())
+        if(order.getOrderStatus()!=OrderStatus.SHIPPED.getOrderStatus()||order.getOrderStatus()!=OrderStatus.DELIVERED.getOrderStatus())
         {
             Buyer buyer = buyerRepository.findBuyerByUsername(userName);
             buyer.getOrders().remove(order);
@@ -294,9 +294,9 @@ public class BuyerServiceImpl implements BuyerService{
         Buyer buyer =buyerRepository.findBuyerByUsername(userName);
         List<Long> lOID=buyer.getOrders().stream().map(o->o.getId()).collect(Collectors.toList());
         Order order=orderRepository.findOrderById(oId);
-        if( lOID.contains(oId) && order.getOrderStatus()!=OrderStatus.Returned.getOrderStatus()) {
+        if( lOID.contains(oId) && order.getOrderStatus()!=OrderStatus.RETURNED.getOrderStatus()) {
 
-            order.setOrderStatus(OrderStatus.Returned.getOrderStatus());
+            order.setOrderStatus(OrderStatus.RETURNED.getOrderStatus());
             buyer.setPoints((int) (buyer.getPoints() - order.getPrice()));
             orderRepository.save(order);
             buyerRepository.save(buyer);

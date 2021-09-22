@@ -44,7 +44,7 @@ public class OrderServiceImpl implements  OrderService{
             List<Long> lOID= buyer.getOrders().stream().map(o->o.getId()).collect(Collectors.toList());
             if( lOID.contains(oId)) {
                 Order order=orderRepository.findOrderById(oId);
-                order.setOrderStatus(OrderStatus.Delivered.getOrderStatus());
+                order.setOrderStatus(OrderStatus.DELIVERED.getOrderStatus());
                 orderRepository.save(order);
                 buyerRepository.save(buyer);
                 return order;

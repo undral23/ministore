@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -21,7 +20,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import edu.miu.waa.ministore.domain.stock.Stock;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,8 +36,6 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private boolean featured = false;
-
 	@NotBlank
 	@NotEmpty
 	private String title;
@@ -53,8 +49,9 @@ public class Product {
 	private double rating = 0;
 
 	public void setAvgRating() {
-		if (reviews != null)
+		if (reviews != null) {
 			this.rating = reviews.stream().map(Review::getStars).reduce(0.0, Double::sum) / reviews.size();
+		}
 	}
 
 	private String status = ProductStatus.PENDING.getProductStatus();
@@ -68,19 +65,21 @@ public class Product {
 	@Digits(fraction = 2, message = "Price Not Valid", integer = 5)
 	private double price = 0;
 
-	@ManyToOne(targetEntity = ProductCategory.class)
-	private ProductCategory productCategory;
+//	@ManyToOne(targetEntity = ProductCategory.class)
+//	private ProductCategory productCategory;
 
 	@DateTimeFormat
 	private LocalDate createdOn;
 
-	@OneToOne(mappedBy = "product")
-	@JsonIgnore
-	private Stock stock;
+//	@OneToOne(mappedBy = "product")
+//	@JsonIgnore
+//	private Stock stock;
 
 	@ManyToOne
 	@JsonIgnore
 	private Seller seller;
+
+	private Long numberInStock;
 
 	@Override
 	public String toString() {

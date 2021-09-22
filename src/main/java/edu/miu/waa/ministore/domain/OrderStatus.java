@@ -1,12 +1,12 @@
 package edu.miu.waa.ministore.domain;
 
 public enum OrderStatus {
-    Shipped("Shipped"),
-    Returned("Returned"),
-    OnTheWay("On the way"),
-    Cancelled("Cancelled"),
-    Delivered("Delivered"),
-    Pending("Pending");
+    SHIPPED("Shipped"),
+    RETURNED("Returned"),
+    ONTHEWAY("On the way"),
+    CANCELLED("Cancelled"),
+    DELIVERED("Delivered"),
+    PENDING("Pending");
 
 
     private String orderStatus;
