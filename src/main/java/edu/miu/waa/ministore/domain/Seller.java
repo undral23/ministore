@@ -40,4 +40,8 @@ public class Seller {
 
 	private String status = ProductStatus.PENDING.getProductStatus();
 
+	public Seller(Long id) {
+		this.id = id;
+	}
+
 }

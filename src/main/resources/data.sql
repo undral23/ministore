@@ -7,17 +7,24 @@
  INSERT INTO user(u_id, email, f_name, l_name, password, username) VALUES (1,'KIPO@miu.com','souf','ennali','1234','admin');
  INSERT INTO user(u_id, email, f_name, l_name, password, username) VALUES (2,'KIPO@miu.com','karim','karim','1234','buyer');
  INSERT INTO user(u_id, email, f_name, l_name, password, username) VALUES (3,'KIPO@miu.com','karim','karim','1234','seller');
+ 
+ INSERT INTO ADMIN  VALUES(1, 1);
+ INSERT INTO BUYER(B_ID, POINTS, USER_ID) values (2, 0, 3);
+ INSERT INTO SELLER(id, status, user_id) values (3, 'APPROVED', 3);
 
  INSERT INTO user_roles(user_id, role_id) VALUES(1,1);
  INSERT INTO user_roles(user_id, role_id) VALUES(2,2);
  INSERT INTO user_roles(user_id, role_id) VALUES(3,3);
  
-INSERT INTO product_category(id, name) VALUES (1,'jewelery');
-INSERT INTO product_category(id, name) VALUES (2,'men s clothing');
-INSERT INTO product_category(id, name) VALUES (4,'electronics');
+--INSERT INTO product_category(id, name) VALUES (1,'jewelery');
+--INSERT INTO product_category(id, name) VALUES (2,'men s clothing');
+--INSERT INTO product_category(id, name) VALUES (4,'electronics');
 
-INSERT INTO product(id, created_on, description, price, rating, status, title,image, number_in_stock)
-VALUES (1, '2021-09-23' ,'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',109.5,'3','APPROVED','Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops','https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg', 100);
+INSERT INTO product(id, created_on, description, price, rating, status, title,image, number_in_stock, seller_id)
+VALUES (1, '2021-09-23' ,'Product description will be here',109.5,'3','APPROVED','Gaming table','https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg', 100, 3);
+
+INSERT INTO product(id, created_on, description, price, rating, status, title,image, number_in_stock, seller_id)
+VALUES (2, '2021-09-23' ,'Product description will be here',100,'5','APPROVED','Chair','https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg', 50, 3);
 
 
 /*-------------------   ADD PRODUCTS-----------------*/

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.waa.ministore.domain.Product;
 import edu.miu.waa.ministore.domain.Review;
+import edu.miu.waa.ministore.service.SellerService;
+import edu.miu.waa.ministore.service.MyUserDetails.LoginUserDetails;
 import edu.miu.waa.ministore.service.products.ProductsService;
 
 @RestController
@@ -27,8 +31,15 @@ public class ProductsController {
 	@Autowired
 	ProductsService productsService;
 
+	@Autowired
+	SellerService sellerService;
+
 	@PostMapping
 	public Product addProduct(@RequestBody Product product) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		LoginUserDetails userDetails = (LoginUserDetails) auth.getPrincipal();
+
+		product.setSeller(sellerService.getSellerByUserName(userDetails.getUsername()));
 		return productsService.addProduct(product);
 	}
 
