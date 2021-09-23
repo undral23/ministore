@@ -47,7 +47,7 @@ public class AuthentificationController {
 
 		final UserDetails userDetails = loginUserDetailsService.loadUserByUsername(authRequest.getUsername());
 		final String jwt = jwtUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails));
 	}
 
 	@PostMapping("/register")
@@ -57,8 +57,8 @@ public class AuthentificationController {
 		if (isUserCreated) {
 			UserDetails userDetails = loginUserDetailsService.loadUserByUsername(userRegisterDTO.getUsername());
 			String jwt = jwtUtil.generateToken(userDetails);
-			return ResponseEntity.ok(new AuthenticationResponse(jwt));
+			return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails));
 		}
-		return ResponseEntity.ok(new AuthenticationResponse(null));
+		return ResponseEntity.ok(new AuthenticationResponse(null, null));
 	}
 }
