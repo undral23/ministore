@@ -9,7 +9,7 @@
  INSERT INTO user(u_id, email, f_name, l_name, password, username) VALUES (3,'KIPO@miu.com','karim','karim','1234','seller');
  
  INSERT INTO ADMIN  VALUES(1, 1);
- INSERT INTO BUYER(B_ID, POINTS, USER_ID) values (2, 0, 3);
+ INSERT INTO BUYER(B_ID, POINTS, USER_ID) values (2, 0, 2);
  INSERT INTO SELLER(id, status, user_id) values (3, 'APPROVED', 3);
 
  INSERT INTO user_roles(user_id, role_id) VALUES(1,1);
