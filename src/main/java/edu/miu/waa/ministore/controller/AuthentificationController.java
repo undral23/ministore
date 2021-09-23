@@ -37,12 +37,11 @@ public class AuthentificationController {
 	@PostMapping("/auth")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authRequest)
 			throws Exception {
-
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 		} catch (BadCredentialsException e) {
-			throw new Exception("!! INCORRECT USER NAME OR PASSWORD", e);
+			throw new Exception("Incorrect user name or password", e);
 		}
 
 		final UserDetails userDetails = loginUserDetailsService.loadUserByUsername(authRequest.getUsername());
@@ -52,7 +51,6 @@ public class AuthentificationController {
 
 	@PostMapping("/register")
 	public ResponseEntity<AuthenticationResponse> createUser(@RequestBody UserRegisterDTO userRegisterDTO) {
-
 		boolean isUserCreated = userService.createUser(userRegisterDTO);
 		if (isUserCreated) {
 			UserDetails userDetails = loginUserDetailsService.loadUserByUsername(userRegisterDTO.getUsername());
