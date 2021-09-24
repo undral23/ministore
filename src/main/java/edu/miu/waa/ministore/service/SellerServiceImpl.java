@@ -43,10 +43,10 @@ public class SellerServiceImpl implements SellerService {
 	}
 
 	@Override
-	public Seller makeItApprovedOrRejected(String userName, String status) {
+	public Seller makeItApprovedOrRejected(Long id, String status) {
 		try {
-			if (sellerRepository.findSellerByUsername(userName) != null) {
-				Seller seller = sellerRepository.findSellerByUsername(userName);
+			Seller seller = sellerRepository.findSellerById(id);
+			if (seller != null) {
 				if (status.equals("Approved")) {
 					seller.setStatus(ProductStatus.APPROVED.getProductStatus());
 					return sellerRepository.save(seller);

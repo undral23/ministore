@@ -40,7 +40,6 @@ public class BuyerController {
 
 	@PostMapping
 	public void addBuyer(@RequestBody Buyer buyer) {
-
 		buyerService.addBuyer(buyer);
 	}
 

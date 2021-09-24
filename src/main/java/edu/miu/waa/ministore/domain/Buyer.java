@@ -55,6 +55,4 @@ public class Buyer {
     @Valid
     @OneToOne(cascade = CascadeType.ALL)
     private CreditCard creditCard=new CreditCard();
-
-
 }

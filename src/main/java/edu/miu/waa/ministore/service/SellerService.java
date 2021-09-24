@@ -12,7 +12,7 @@ public interface SellerService {
 
 	public List<Long> getOrderIdsBySellerById(long id);
 
-	public Seller makeItApprovedOrRejected(String userName, String status);
+	public Seller makeItApprovedOrRejected(Long id, String status);
 
 	public List<Order> getOrdersBySellerById(long id);
 
