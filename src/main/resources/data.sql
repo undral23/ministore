@@ -21,10 +21,10 @@
 --INSERT INTO product_category(id, name) VALUES (4,'electronics');
 
 INSERT INTO product(id, created_on, description, price, rating, status, title,image, number_in_stock, seller_id)
-VALUES (1, '2021-09-23' ,'Product description will be here',109.5,'3','APPROVED','Gaming table','https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg', 100, 3);
+VALUES (1, '2021-09-23' ,'Product description will be here',109.5,'3','APPROVED','Gaming table','https://thermaltake.azureedge.net/pub/media/catalog/product/cache/e4fc6e308b66431a310dcd4dc0838059/0/1/01_6_1.jpg', 100, 3);
 
 INSERT INTO product(id, created_on, description, price, rating, status, title,image, number_in_stock, seller_id)
-VALUES (2, '2021-09-23' ,'Product description will be here',100,'5','APPROVED','Chair','https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg', 50, 3);
+VALUES (2, '2021-09-23' ,'Product description will be here',100,'5','APPROVED','Chair','https://www.ikea.com/us/en/images/products/millberget-swivel-chair-bomstad-black__0724719_pe734602_s5.jpg', 50, 3);
 
 
 /*-------------------   ADD PRODUCTS-----------------*/
