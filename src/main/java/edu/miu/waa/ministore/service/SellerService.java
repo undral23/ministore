@@ -26,5 +26,9 @@ public interface SellerService {
 
 	public Order cancelSellerOrder(String userName, long oId);
 
+	public Order onthewaySellerOrder(String userName, long oId);
+
+	public Order deliveredSellerOrder(String userName, long oId);
+
 	public Order getOrderByIdForSeller(String userName, long oId);
 }

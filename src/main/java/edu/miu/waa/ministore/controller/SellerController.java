@@ -68,6 +68,16 @@ public class SellerController {
 		return sellerService.shipSellerOrder(userName, oId);
 	}
 
+	@PostMapping("/{userName}/order/ontheway/{id}")
+	public Order onthewaySellerOrder(@PathVariable("userName") String userName, @PathVariable("id") long oId) {
+		return sellerService.onthewaySellerOrder(userName, oId);
+	}
+
+	@PostMapping("/{userName}/order/delivered/{id}")
+	public Order deliveredSellerOrder(@PathVariable("userName") String userName, @PathVariable("id") long oId) {
+		return sellerService.deliveredSellerOrder(userName, oId);
+	}
+
 	@PostMapping("/{userName}")
 	public Product addProduct(@RequestBody Product product, @RequestParam("cat") long cat_id,
 			@PathVariable String userName) {

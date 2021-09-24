@@ -114,8 +114,38 @@ public class SellerServiceImpl implements SellerService {
 
 		Order order = orders.stream().filter(o-> o.getId() == oId).findFirst().get();
 
-		if (order.getOrderStatus() != OrderStatus.SHIPPED.getOrderStatus())
+		if (order.getOrderStatus() == OrderStatus.PENDING.getOrderStatus())
 		order.setOrderStatus(OrderStatus.CANCELLED.getOrderStatus());
+		orderService.save(order);
+
+		return order;
+	}
+
+	@Override
+	public Order onthewaySellerOrder(String userName, long oId) {
+		Seller seller = sellerService.getSellerByUserName(userName);
+
+		List<Order> orders = this.getOrderIdsBySellerById(seller.getId());
+
+		Order order = orders.stream().filter(o-> o.getId() == oId).findFirst().get();
+
+		if (order.getOrderStatus() == OrderStatus.SHIPPED.getOrderStatus())
+			order.setOrderStatus(OrderStatus.ONTHEWAY.getOrderStatus());
+		orderService.save(order);
+
+		return order;
+	}
+
+	@Override
+	public Order deliveredSellerOrder(String userName, long oId) {
+		Seller seller = sellerService.getSellerByUserName(userName);
+
+		List<Order> orders = this.getOrderIdsBySellerById(seller.getId());
+
+		Order order = orders.stream().filter(o-> o.getId() == oId).findFirst().get();
+
+		if (order.getOrderStatus() == OrderStatus.ONTHEWAY.getOrderStatus())
+			order.setOrderStatus(OrderStatus.DELIVERED.getOrderStatus());
 		orderService.save(order);
 
 		return order;
