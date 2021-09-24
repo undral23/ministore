@@ -69,14 +69,13 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public List<Order> getOrdersBySellerById(long sId) {
 
-		List<Order> orders = sellerRepository.getOrdersBySellerBySId(sId).stream()
-				.map(o -> orderRepository.findById(o).get()).collect(Collectors.toList());
+		List<Order> orders = sellerRepository.getOrdersBySellerBySId(sId);
 		return orders;
 
 	}
 
 	@Override
-	public List<Long> getOrderIdsBySellerById(long sId) {
+	public List<Order> getOrderIdsBySellerById(long sId) {
 		return sellerRepository.getOrdersBySellerBySId(sId);
 	}
 
@@ -98,29 +97,58 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public Order shipSellerOrder(String userName, long oId) {
 		Seller seller = sellerRepository.findSellerByUsername(userName);
-		List<Long> lOID = this.getOrderIdsBySellerById(seller.getId());
-		if (lOID.contains(oId)) {
-			Order order = orderService.getOrderById(oId);
-			order.setOrderStatus(OrderStatus.SHIPPED.getOrderStatus());
-			orderService.save(order);
-			sellerService.save(seller);
-			return order;
-		}
-		return null;
+		List<Order> orders = this.getOrderIdsBySellerById(seller.getId());
+
+		Order order = orders.stream().filter(o-> o.getId() == oId).findFirst().get();
+
+		order.setOrderStatus(OrderStatus.SHIPPED.getOrderStatus());
+		orderService.save(order);
+		return order;
 	}
 
 	@Override
 	public Order cancelSellerOrder(String userName, long oId) {
 		Seller seller = sellerService.getSellerByUserName(userName);
-		List<Long> lOID = sellerService.getOrderIdsBySellerById(seller.getId());
-		if (lOID.contains(oId)) {
-			Order order = orderService.getOrderById(oId);
-			if (order.getOrderStatus() != OrderStatus.SHIPPED.getOrderStatus())
-				order.setOrderStatus(OrderStatus.CANCELLED.getOrderStatus());
-			orderService.save(order);
-			return order;
-		}
-		return null;
+
+		List<Order> orders = this.getOrderIdsBySellerById(seller.getId());
+
+		Order order = orders.stream().filter(o-> o.getId() == oId).findFirst().get();
+
+		if (order.getOrderStatus() == OrderStatus.PENDING.getOrderStatus())
+		order.setOrderStatus(OrderStatus.CANCELLED.getOrderStatus());
+		orderService.save(order);
+
+		return order;
+	}
+
+	@Override
+	public Order onthewaySellerOrder(String userName, long oId) {
+		Seller seller = sellerService.getSellerByUserName(userName);
+
+		List<Order> orders = this.getOrderIdsBySellerById(seller.getId());
+
+		Order order = orders.stream().filter(o-> o.getId() == oId).findFirst().get();
+
+		if (order.getOrderStatus() == OrderStatus.SHIPPED.getOrderStatus())
+			order.setOrderStatus(OrderStatus.ONTHEWAY.getOrderStatus());
+		orderService.save(order);
+
+		return order;
+	}
+
+	@Override
+	public Order deliveredSellerOrder(String userName, long oId) {
+		Seller seller = sellerService.getSellerByUserName(userName);
+
+		List<Order> orders = this.getOrderIdsBySellerById(seller.getId());
+
+		Order order = orders.stream().filter(o-> o.getId() == oId).findFirst().get();
+
+		if (order.getOrderStatus() == OrderStatus.ONTHEWAY.getOrderStatus())
+			order.setOrderStatus(OrderStatus.DELIVERED.getOrderStatus());
+		orderService.save(order);
+
+		return order;
 	}
 
 	@Override

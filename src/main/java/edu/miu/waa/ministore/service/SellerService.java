@@ -10,7 +10,7 @@ public interface SellerService {
 
 	public Seller getSellerByUserName(String userName);
 
-	public List<Long> getOrderIdsBySellerById(long id);
+	public List<Order> getOrderIdsBySellerById(long id);
 
 	public Seller makeItApprovedOrRejected(Long id, String status);
 
@@ -25,6 +25,10 @@ public interface SellerService {
 	public Order shipSellerOrder(String userName, long oId);
 
 	public Order cancelSellerOrder(String userName, long oId);
+
+	public Order onthewaySellerOrder(String userName, long oId);
+
+	public Order deliveredSellerOrder(String userName, long oId);
 
 	public Order getOrderByIdForSeller(String userName, long oId);
 }
