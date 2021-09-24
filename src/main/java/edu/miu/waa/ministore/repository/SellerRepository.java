@@ -1,5 +1,6 @@
 package edu.miu.waa.ministore.repository;
 
+import edu.miu.waa.ministore.domain.Order;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -24,10 +25,8 @@ public interface SellerRepository extends CrudRepository<Seller, Long> {
 //    @Query("select s from Seller  s where s.sId=:sId")
     public Seller findSellerById(@Param("id") long id);
 
-    @Query(value = "SELECT DISTINCT ord_id FROM maskm_db.ord_line_items where line_items_id in " +
-            "(SELECT li.id FROM maskm_db.line_item li where product_id  in " +
-            "(SELECT products_id FROM maskm_db.seller_products where seller_s_id=:sId ))",nativeQuery = true)
-    public List<Long> getOrdersBySellerBySId(@Param("sId") long sId);
+    @Query(value = "SELECT DISTINCT ord FROM order ord INNER JOIN FETCH ord.lineItems li where li.product.seller.id = :sId")
+    public List<Order> getOrdersBySellerBySId(@Param("sId") long sId);
 
     @Query("select s from Seller s where s.user.username=:userName")
     public Seller findSellerBySUserName(String userName);
