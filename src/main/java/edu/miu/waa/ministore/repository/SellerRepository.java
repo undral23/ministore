@@ -31,6 +31,6 @@ public interface SellerRepository extends CrudRepository<Seller, Long> {
     @Query("select s from Seller s where s.user.username=:userName")
     public Seller findSellerBySUserName(String userName);
 
-    @Query(value = "select seller.products from Seller seller where seller.user.username=:sellerUserName")
+    @Query(value = "select p from Product p INNER JOIN p.seller s where s.user.username=:sellerUserName")
     public List<Product> findAllProductBySellerUserName(String sellerUserName, Pageable pageable);
 }
