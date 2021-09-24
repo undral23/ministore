@@ -85,7 +85,7 @@ public class SellerController {
 	}
 
 	@DeleteMapping("{seller_userName}/products/{product_id}")
-	public boolean deleteProduct(@PathVariable long product_id, @PathVariable String seller_userName) {
-		return productsService.deleteProduct(product_id, seller_userName);
+	public void deleteProduct(@PathVariable long product_id, @PathVariable String seller_userName) {
+		productsService.deleteProduct(product_id);
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,10 +68,11 @@ public class ProductsController {
 		else
 			return productsService.getAllProducts(Pageable.unpaged());
 	}
-//    @PutMapping("/delete/{id}")
-//    public boolean deleteProductById(@PathVariable long id){
-//        return productsService.deleteProduct(id);
-//    }
+
+	@DeleteMapping("/{id}")
+	public void deleteProductById(@PathVariable long id) {
+		productsService.deleteProduct(id);
+	}
 
 	@GetMapping("/{id}")
 	public Product getProductById(@PathVariable long id) {

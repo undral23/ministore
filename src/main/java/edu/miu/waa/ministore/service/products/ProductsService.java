@@ -29,7 +29,7 @@ public interface ProductsService {
 	public Product makeItApprovedOrRejected(long id, String status);
 
 //    public Product makeItFeatured(long id,boolean featured);
-	public boolean deleteProduct(long product_id, String seller_userName);
+	public void deleteProduct(long product_id);
 
 	public Product addReviewToProduct(long id, Review review);
 

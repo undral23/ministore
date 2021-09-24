@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import edu.miu.waa.ministore.domain.Product;
 import edu.miu.waa.ministore.domain.ProductStatus;
 import edu.miu.waa.ministore.domain.Review;
-import edu.miu.waa.ministore.domain.Seller;
 import edu.miu.waa.ministore.repository.CategoryRepository;
 import edu.miu.waa.ministore.repository.ProductsRepository;
 import edu.miu.waa.ministore.repository.SellerRepository;
@@ -152,17 +151,8 @@ public class ProductsServiceImpl implements ProductsService {
 //    }
 
 	@Override
-	public boolean deleteProduct(long product_id, String seller_userName) {
-		if (productsRepository.deletableProduct(product_id).size() == 0
-				|| productsRepository.deletableProduct(product_id) == null) {
-			Seller seller = sellerRepository.findSellerByUsername(seller_userName);
-			List<Product> products = seller.getProducts();
-			products.remove(productsRepository.getProductById(product_id).get());
-			sellerRepository.save(seller);
-			productsRepository.deleteById(product_id);
-			return true;
-		}
-		return false;
+	public void deleteProduct(long product_id) {
+		productsRepository.deleteById(product_id);
 	}
 
 	@Override
